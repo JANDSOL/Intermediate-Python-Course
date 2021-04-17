@@ -27,7 +27,7 @@ def run():
 
     """Tour of the elements contained in the nested dictionary."""
     for key, value in nested_dict.items():
-            print(key + ':', value)
+        print(key + ':', value)
 
 
 if __name__ == '__main__':

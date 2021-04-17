@@ -18,6 +18,11 @@ def run():
     for idx in nested_list:
         for key, value in idx.items():
             print(key + ':', value)
+    
+    print('')
+
+    for key, value in nested_dict.items():
+            print(key + ':', value)
 
 
 if __name__ == '__main__':

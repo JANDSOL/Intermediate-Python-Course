@@ -15,6 +15,10 @@ def run():
         'names': ['Jhon', 'Peter', 'Kike'],
     }
 
+    for idx in nested_list:
+        for key, value in idx.items():
+            print(key + ':', value)
+
 
 if __name__ == '__main__':
     run()

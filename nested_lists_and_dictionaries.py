@@ -9,6 +9,12 @@ def run():
         {"pet's name": 'kimba', 'favorite color': 'cold colors', },
     ]
 
+    nested_dict = {
+        'fruits': ['apple, grape, banana, pear'],
+        'programming languages': ['python', 'java', 'c++', 'kotlin'],
+        'names': ['Jhon', 'Peter', 'Kike'],
+    }
+
 
 if __name__ == '__main__':
     run()

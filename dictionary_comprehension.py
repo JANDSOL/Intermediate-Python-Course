@@ -23,6 +23,11 @@ def run():
     print('\n***Diccionario Común del Reto***')
     print(my_dict2)
 
+    """Dictionary Comprehension Challenge"""
+    my_dict_comp2 = {num: round(square_root(num), 3) for num in range(1, 1001)}
+    print('\n***Dictionary Comprehension***')
+    print(my_dict_comp2)
+
 
 if __name__ == '__main__':
     run()

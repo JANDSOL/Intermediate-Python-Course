@@ -23,6 +23,11 @@ def run():
     print('\n***Lista común del reto***')
     print(my_list)
 
+    """List Comprehension Challenge"""
+    my_list_comp = [i*36 for i in NUM_RANGE if i * 36 % 36 == 0]
+    print('\n***List comprehension del reto***')
+    print(my_list_comp)
+
 
 if __name__ == '__main__':
     run()

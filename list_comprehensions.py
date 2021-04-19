@@ -28,6 +28,12 @@ def run():
     print('\n***Lista común del reto***')
     print(my_list)
 
+    """List Comprehension Challenge"""
+    my_list_comp = [multiple4 * 4 for multiple4 in NUM_RANGE for multiple6 in NUM_RANGE if multiple4 * 4 \
+                    == multiple6 * 6 for multiple9 in NUM_RANGE if multiple4 * 4 == multiple9 * 9]
+    print('\n***List comprehension del reto***')
+    print(my_list_comp)
+
 
 if __name__ == '__main__':
     run()

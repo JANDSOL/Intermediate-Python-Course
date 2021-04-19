@@ -1,4 +1,7 @@
 from math import sqrt as square_root
+"""This library will help us to take
+the square root of a number."""
+
 
 def run():
     """Common Dictionary"""

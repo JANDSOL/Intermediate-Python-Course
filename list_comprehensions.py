@@ -19,7 +19,6 @@ def run():
     for number in NUM_RANGE:
         if (number * 36) % 36 == 0:
             my_list.append(number * 36)
-
     print('\n***Lista común del reto***')
     print(my_list)
 

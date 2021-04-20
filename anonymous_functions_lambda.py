@@ -1,9 +1,6 @@
 def palidrome(word):
     """One word palidrome without lambda"""
-    if word == word[::-1]:
-        return True
-    else:
-        return False
+    return word == word[::-1]
 
 
 def run():

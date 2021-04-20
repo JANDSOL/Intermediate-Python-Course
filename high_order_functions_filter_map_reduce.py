@@ -1,6 +1,15 @@
-def run():
-    pass
+"""Example of high order functions"""
+
+def saludo(func):
+	func()
+
+def hola():
+	print('Hola!!!')
+
+def adios():
+	print('Adios!!!')
 
 
 if __name__ == '__main__':
-    run()
+	saludo(hola)
+	saludo(adios)

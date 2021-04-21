@@ -5,6 +5,11 @@ def run():
     print('***Cuadrados de los números con List C.***')
     print(list_comp)
 
+    """Example With Map"""
+    list_map = list(map(lambda x: x**2, my_list))
+    print('\n***Cuadrados de los números con Map***')
+    print(list_map)
+
 
 if __name__ == '__main__':
     run()

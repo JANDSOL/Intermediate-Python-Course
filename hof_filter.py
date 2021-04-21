@@ -8,7 +8,7 @@ def run():
     """High Order Functions, Filter"""
     odd_nums2 = list(filter(lambda x: x % 2 != 0, my_list))
     print('\n***Números impares con Filter***')
-    print(odd_nums)
+    print(odd_nums2)
 
 
 if __name__ == '__main__':

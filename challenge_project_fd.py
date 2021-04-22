@@ -81,6 +81,13 @@ def run():
         print('Python devs:', worker)
     print('')
 
+    # Contains the name of the platzi workers.
+    all_platzi_workers = list(filter(lambda worker: worker['organization'] == 'Platzi', DATA))
+    all_platzi_workers = list(map(lambda worker: worker['name'], all_platzi_workers))
+    for worker in all_platzi_workers:
+        print('Platzi workers:', worker)
+    print('')
+
 
 if __name__ == '__main__':
     run()

@@ -73,7 +73,17 @@ DATA = [
 
 
 def run():
-    pass
+    """List Comprehension"""
+    # Contains the name of the python developers.
+    all_python_devs = [worker['name'] for worker in DATA if worker['language'] == 'python']
+    for worker in all_python_devs:
+        print('Python devs:', worker)
+    print('')
+
+    # Contains the name of the platzi workers.
+    all_platzi_workers = [worker['name'] for worker in DATA if worker['organization'] == 'Platzi']
+    for worker in all_platzi_workers:
+        print('Platzi workers:', worker)
 
 
 if __name__ == '__main__':

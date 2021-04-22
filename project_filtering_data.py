@@ -92,6 +92,12 @@ def run():
     adults = list(map(lambda worker: worker['name'], adults))
     for worker in all_platzi_workers:
         print('Workers adults:', worker)
+    print('')
+
+    # Contains the workers old.
+    old_people = list(map(lambda worker: worker | {'old': worker['age'] > 70}, DATA))
+    for dicts in old_people:
+        print(dicts)
 
 
 if __name__ == '__main__':

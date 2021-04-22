@@ -73,7 +73,13 @@ DATA = [
 
 
 def run():
-    pass
+    """High Order Functions"""
+    # Contains the name of the python developers.
+    all_python_devs = list(filter(lambda worker: worker['language'] == 'python', DATA))
+    all_python_devs = list(map(lambda worker: worker['name'], all_python_devs))
+    for worker in all_python_devs:
+        print('Python devs:', worker)
+    print('')
 
 
 if __name__ == '__main__':

@@ -88,6 +88,13 @@ def run():
         print('Platzi workers:', worker)
     print('')
 
+    """List Comprehension"""
+    # Contains the workers adults.
+    adults = [worker['name'] for worker in DATA if worker['age'] > 18]
+    for worker in adults:
+        print('Workers adults:', worker)
+    print('')
+
 
 if __name__ == '__main__':
     run()

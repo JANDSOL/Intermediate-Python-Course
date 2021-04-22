@@ -95,6 +95,11 @@ def run():
         print('Workers adults:', worker)
     print('')
 
+    # Contains the workers old.
+    old_people = [worker | {'old': worker['age'] > 70} for worker in DATA]
+    for dicts in old_people:
+        print(dicts)
+
 
 if __name__ == '__main__':
     run()

@@ -8,8 +8,9 @@ def read():
 def write():
     """Save names from a list to a file"""
     names = ['Juan', 'Pablo', 'Pedro', 'Jesús', 'María']
-    with open("./archives/names.txt", "w", encoding="UTF-8") as f:
-        for name in names:
+    names2 = ['Fernanda', 'Lola', 'Esperanza', 'Esther', 'Lucas']
+    with open("./archives/names.txt", "a", encoding="UTF-8") as f:
+        for name in names2:
             f.write(name)
             f.write('\n')
 

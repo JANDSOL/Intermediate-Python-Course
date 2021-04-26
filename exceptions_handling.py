@@ -1,7 +1,6 @@
-def run():
-    pass
+def palindrome(string):
+    return string == string[::-1]
 
 
 if __name__ == '__main__':
-    run()
-
+    print(palindrome(1))

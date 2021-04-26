@@ -5,8 +5,10 @@ def divisors(num):
     return divisors
 
 def run():
+    """Use assert statements to prevent the user from
+    entering a negative number in our divisor program"""
     num = input('Ingresa un número: ')
-    assert num.isnumeric(), 'Debes ingresar un número.'
+    assert num.isdigit() and int(num) >= 0, 'Debes ingresar un número entero positivo.'
     print('\nDIVISORES DE', num)
     print(divisors(int(num)))
 

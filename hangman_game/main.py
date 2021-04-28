@@ -1,11 +1,14 @@
 from os import system as window_clear    # In charge of refreshing our screen
+import time
 from name_of_game import NameOfGame
 from levels import Levels
 from images import Images
+from game_over import GameOver
 
 
 def name_game():
     """It will print the name of the game"""
+    window_clear('cls')
     NAME_OF_GAME = NameOfGame().NAME_GAME
     count = 0
     while(count < 21):
@@ -23,10 +26,60 @@ def list_words():
 def main():
     """Game Body"""
     name_game()
+    k_playing = ''
+    keep_playing = True
+    letter_entered = ''
+
+    while (keep_playing == True):  # Loop to keep playing.
+        for num_image, picture_level in enumerate(LEVEL):
+
+            while(True):  # Loop to stop at each level.
+                if num_image < 6:
+                    """Validate if invalid characters are entered"""
+                    print(picture_level)
+                    print(DOLL_PICTURE[num_image])
+                    letter_entered = input('Ingresa una letra o palabra: ')
+                    letter_entered = letter_entered.replace(' ', '')
+
+                    if letter_entered.isalpha():
+                        break
+                    else:
+                        print('\n¡Ingresa una letra o palabra VÁLIDA!')
+                        print('Espera...')
+                        time.sleep(2)
+                        window_clear('cls')
+                else:
+                    break  # Break loop if it reaches level 6.
+            window_clear('cls')
+        
+        while (True):
+            print(GAME_OVER)
+            print(DOLL_PICTURE[num_image + 1])
+            # Ask if you want to continue playing.
+            k_playing = input('\n¿QUIERES SEGUIR JUGANDO?\n')
+            k_playing = k_playing.replace(' ', '')
+            k_playing = k_playing.lower()
+            k_playing = k_playing.replace('í', 'i')
+            k_playing = k_playing.replace('ó', 'o')
+            if k_playing.isalpha() and k_playing == 'si':
+                window_clear('cls')
+                break
+            elif k_playing.isalpha() and k_playing == 'no':
+                keep_playing = False
+                window_clear('cls')
+                break
+            else:
+                print('\n¡Ingrese una respuesta válida!')
+                print('Espera...')
+                time.sleep(2)
+                window_clear('cls')
+    print(GAME_OVER)
+    print(DOLL_PICTURE[6])
 
 
 if __name__ == '__main__':
     LEVEL = Levels().LEVELS
     DOLL_PICTURE = Images().IMAGES
+    GAME_OVER = GameOver().GAME_OVER
     WORDS = list_words()
     main()

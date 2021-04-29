@@ -1,5 +1,6 @@
 from os import system as window_clear    # In charge of refreshing our screen
-import time
+from time import sleep
+from random import randrange
 from name_of_game import NameOfGame
 from levels import Levels
 from images import Images
@@ -23,6 +24,14 @@ def list_words():
         ls_words = [word.replace('\n', '') for word in f]
         return ls_words
 
+def remove_accents(w_from_list, w_entered):
+    pass
+
+def list_random():
+    """It will bring up random words without
+    repetitions from the word list."""
+    return (WORDS[randrange(0, NUM_OF_WORDS_IN_LIST)])
+
 def main():
     """Game Body"""
     name_game()
@@ -31,7 +40,9 @@ def main():
     letter_entered = ''
 
     while (keep_playing == True):  # Loop to keep playing.
-        for num_image, picture_level in enumerate(LEVEL):
+        word = list_random()
+
+        for num_image, picture_level in enumerate(LEVEL):  # Level tour.
 
             while(True):  # Loop to stop at each level.
                 if num_image < 6:
@@ -40,13 +51,16 @@ def main():
                     print(DOLL_PICTURE[num_image])
                     letter_entered = input('Ingresa una letra o palabra: ')
                     letter_entered = letter_entered.replace(' ', '')
-
                     if letter_entered.isalpha():
-                        break
+                        # Check if it's letter.
+                        if len(letter_entered) == 1:
+                            remove_accents()
+                        else:  # Check if it's word.
+                            pass
                     else:
                         print('\n¡Ingresa una letra o palabra VÁLIDA!')
                         print('Espera...')
-                        time.sleep(2)
+                        sleep(2)
                         window_clear('cls')
                 else:
                     break  # Break loop if it reaches level 6.
@@ -71,7 +85,7 @@ def main():
             else:
                 print('\n¡Ingrese una respuesta válida!')
                 print('Espera...')
-                time.sleep(2)
+                sleep(2)
                 window_clear('cls')
     print(GAME_OVER)
     print(DOLL_PICTURE[6])
@@ -82,4 +96,5 @@ if __name__ == '__main__':
     DOLL_PICTURE = Images().IMAGES
     GAME_OVER = GameOver().GAME_OVER
     WORDS = list_words()
+    NUM_OF_WORDS_IN_LIST = len(WORDS) - 1
     main()

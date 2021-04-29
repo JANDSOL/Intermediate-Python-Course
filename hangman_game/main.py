@@ -34,7 +34,19 @@ def remove_accents(w_from_list, w_entered):
 def list_random():
     """It will bring up random words without
     repetitions from the word list."""
-    return WORDS[randrange(0, NUM_OF_WORDS_IN_LIST)]
+    words_already_chosen = []
+    # Restart words without repetitions if all words were covered.
+    if len(words_already_chosen) - 1 == NUM_OF_WORDS_IN_LIST:
+        while(len(words_already_chosen) != 0):
+            words_already_chosen.pop()
+    # Check that there are no words that are repeated in the game.
+    while(True):
+        idx_list_random = randrange(0, NUM_OF_WORDS_IN_LIST + 1)
+        if idx_list_random not in words_already_chosen:
+            words_already_chosen.append(idx_list_random)
+            break
+
+    return WORDS[idx_list_random]
 
 def main():
     """Game Body"""
@@ -61,7 +73,7 @@ def main():
                             formatted_word, formatted_string_ent = \
                                 remove_accents(word, string_entered)
                             if formatted_string_ent in formatted_word:
-                                pass
+                                window_clear('cls')
                             else:
                                 break
                         else:  # Check if it's word.

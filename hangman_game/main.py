@@ -48,19 +48,50 @@ def list_random():
 
     return WORDS[idx_list_random]
 
+def ask_continue_playing(num_image, keep_playing, level_comp, counter_level_win):
+    k_playing = ''
+    while (True):
+        if level_comp:
+            print(GAME_OVER)
+            print(DOLL_PICTURE[counter_level_win])
+        else:
+            print(GAME_OVER)
+            print(DOLL_PICTURE[num_image + 1])
+        # Ask if you want to continue playing.
+        k_playing = input('\n¿QUIERES SEGUIR JUGANDO?\n')
+        k_playing = k_playing.replace(' ', '')
+        k_playing = k_playing.lower()
+        k_playing = k_playing.replace('í', 'i')
+        k_playing = k_playing.replace('ó', 'o')
+        if k_playing.isalpha() and k_playing == 'si':
+            window_clear('cls')
+            break
+        elif k_playing.isalpha() and k_playing == 'no':
+            keep_playing = False
+            window_clear('cls')
+            break
+        else:
+            print('\n¡Ingrese una respuesta válida!')
+            print('Espera...')
+            sleep(2)
+            window_clear('cls')
+
+    return keep_playing
+
 def main():
     """Game Body"""
     name_game()
-    k_playing = ''
     keep_playing = True
     string_entered = ''
 
     while (keep_playing == True):  # Loop to keep playing.
+        level_complete = False
+        lap_counter = 0
         word = list_random()
 
         for num_image, picture_level in enumerate(LEVEL):  # Level tour.
 
-            while(True):  # Loop to stop at each level.
+            while(level_complete == False):  # Loop to stop at each level.
                 if num_image < 6:
                     """Validate if invalid characters are entered"""
                     print(picture_level)
@@ -68,16 +99,35 @@ def main():
                     string_entered = input('Ingresa una letra o palabra: ')
                     string_entered = string_entered.replace(' ', '')
                     if string_entered.isalpha():
+                        FORMATTED_WORD, formatted_string_ent = \
+                        remove_accents(word, string_entered)
+                        print(FORMATTED_WORD)
+                        input()
                         # Check if it's letter.
                         if len(string_entered) == 1:
-                            formatted_word, formatted_string_ent = \
-                                remove_accents(word, string_entered)
-                            if formatted_string_ent in formatted_word:
+                            if formatted_string_ent in FORMATTED_WORD:  
+                                """TODO:
+                                        1. Implementar un sistema de chequeo,
+                                           para poder intercambiar los caracteres
+                                           por los espacios vacios.
+                                        2. Implementar otro módulo que juegue con esto
+                                           del intercambio, investiga el .format() en
+                                           strings.
+                                        3. Condicional para que confirme si las letras
+                                           completaron la palabra a buscar"""
                                 window_clear('cls')
                             else:
+                                lap_counter += 1
+                                window_clear('cls')
                                 break
                         else:  # Check if it's word.
-                            pass
+                            if formatted_string_ent == FORMATTED_WORD:
+                                level_complete = True
+                                break
+                            else:
+                                lap_counter += 1
+                                window_clear('cls')
+                                break
                     else:
                         print('\n¡Ingresa una letra o palabra VÁLIDA!')
                         print('Espera...')
@@ -87,29 +137,15 @@ def main():
                     break  # Break loop if it reaches level 6.
             window_clear('cls')
         
-        while (True):
-            print(GAME_OVER)
-            print(DOLL_PICTURE[num_image + 1])
-            # Ask if you want to continue playing.
-            k_playing = input('\n¿QUIERES SEGUIR JUGANDO?\n')
-            k_playing = k_playing.replace(' ', '')
-            k_playing = k_playing.lower()
-            k_playing = k_playing.replace('í', 'i')
-            k_playing = k_playing.replace('ó', 'o')
-            if k_playing.isalpha() and k_playing == 'si':
-                window_clear('cls')
-                break
-            elif k_playing.isalpha() and k_playing == 'no':
-                keep_playing = False
-                window_clear('cls')
-                break
-            else:
-                print('\n¡Ingrese una respuesta válida!')
-                print('Espera...')
-                sleep(2)
-                window_clear('cls')
-    print(GAME_OVER)
-    print(DOLL_PICTURE[6])
+        keep_playing = ask_continue_playing(num_image, keep_playing, \
+                                            level_complete, lap_counter)
+                                            
+    if level_complete:
+        print(GAME_OVER)
+        print(DOLL_PICTURE[lap_counter])
+    else:
+        print(GAME_OVER)
+        print(DOLL_PICTURE[6])
 
 
 if __name__ == '__main__':

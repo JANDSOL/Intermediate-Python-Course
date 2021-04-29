@@ -25,19 +25,23 @@ def list_words():
         return ls_words
 
 def remove_accents(w_from_list, w_entered):
-    pass
+    w_from_list = w_from_list.lower().replace('á', 'a').replace('é', 'e')\
+                   .replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+    w_entered = w_entered.lower().replace('á', 'a').replace('é', 'e')\
+                   .replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+    return w_from_list, w_entered
 
 def list_random():
     """It will bring up random words without
     repetitions from the word list."""
-    return (WORDS[randrange(0, NUM_OF_WORDS_IN_LIST)])
+    return WORDS[randrange(0, NUM_OF_WORDS_IN_LIST)]
 
 def main():
     """Game Body"""
     name_game()
     k_playing = ''
     keep_playing = True
-    letter_entered = ''
+    string_entered = ''
 
     while (keep_playing == True):  # Loop to keep playing.
         word = list_random()
@@ -49,12 +53,17 @@ def main():
                     """Validate if invalid characters are entered"""
                     print(picture_level)
                     print(DOLL_PICTURE[num_image])
-                    letter_entered = input('Ingresa una letra o palabra: ')
-                    letter_entered = letter_entered.replace(' ', '')
-                    if letter_entered.isalpha():
+                    string_entered = input('Ingresa una letra o palabra: ')
+                    string_entered = string_entered.replace(' ', '')
+                    if string_entered.isalpha():
                         # Check if it's letter.
-                        if len(letter_entered) == 1:
-                            remove_accents()
+                        if len(string_entered) == 1:
+                            formatted_word, formatted_string_ent = \
+                                remove_accents(word, string_entered)
+                            if formatted_string_ent in formatted_word:
+                                pass
+                            else:
+                                break
                         else:  # Check if it's word.
                             pass
                     else:

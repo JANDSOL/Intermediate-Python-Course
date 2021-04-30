@@ -5,6 +5,8 @@ from name_of_game import NameOfGame
 from levels import Levels
 from images import Images
 from game_over import GameOver
+from character_replacement import CharacterReplacement as \
+    dashboard
 
 
 def name_game():
@@ -21,7 +23,7 @@ def name_game():
 def list_words():
     """Contains the list with words to guess"""
     with open('./archive/data.txt', 'r', encoding='UTF-8') as f:
-        ls_words = [word.replace('\n', '') for word in f]
+        ls_words = [word.replace('\n', '').replace(' ', '') for word in f]
         return ls_words
 
 def remove_accents(w_from_list, w_entered):
@@ -48,16 +50,9 @@ def list_random():
 
     return WORDS[idx_list_random]
 
-def ask_continue_playing(num_image, keep_playing, level_comp, counter_level_win):
+def ask_continue_playing(keep_playing):
     k_playing = ''
     while (True):
-        if level_comp:
-            print(GAME_OVER)
-            print(DOLL_PICTURE[counter_level_win])
-        else:
-            print(GAME_OVER)
-            print(DOLL_PICTURE[num_image + 1])
-        # Ask if you want to continue playing.
         k_playing = input('\n¿QUIERES SEGUIR JUGANDO?\n')
         k_playing = k_playing.replace(' ', '')
         k_playing = k_playing.lower()
@@ -88,6 +83,8 @@ def main():
         level_complete = False
         lap_counter = 0
         word = list_random()
+        found_letters = {}
+        formatted_word, string_entered, formatted_string_ent = '', '', ''
 
         for num_image, picture_level in enumerate(LEVEL):  # Level tour.
 
@@ -96,24 +93,19 @@ def main():
                     """Validate if invalid characters are entered"""
                     print(picture_level)
                     print(DOLL_PICTURE[num_image])
+                    dashboard(word, formatted_word, string_entered,formatted_string_ent, \
+                              found_letters)
                     string_entered = input('Ingresa una letra o palabra: ')
                     string_entered = string_entered.replace(' ', '')
+                    print(found_letters)
                     if string_entered.isalpha():
-                        FORMATTED_WORD, formatted_string_ent = \
+                        formatted_word, formatted_string_ent = \
                         remove_accents(word, string_entered)
-                        print(FORMATTED_WORD)
-                        input()
                         # Check if it's letter.
                         if len(string_entered) == 1:
-                            if formatted_string_ent in FORMATTED_WORD:  
+                            if formatted_string_ent in formatted_word:  
                                 """TODO:
-                                        1. Implementar un sistema de chequeo,
-                                           para poder intercambiar los caracteres
-                                           por los espacios vacios.
-                                        2. Implementar otro módulo que juegue con esto
-                                           del intercambio, investiga el .format() en
-                                           strings.
-                                        3. Condicional para que confirme si las letras
+                                        1. Condicional para que confirme si las letras
                                            completaron la palabra a buscar"""
                                 window_clear('cls')
                             else:
@@ -121,7 +113,7 @@ def main():
                                 window_clear('cls')
                                 break
                         else:  # Check if it's word.
-                            if formatted_string_ent == FORMATTED_WORD:
+                            if formatted_string_ent == formatted_word:
                                 level_complete = True
                                 break
                             else:
@@ -136,9 +128,18 @@ def main():
                 else:
                     break  # Break loop if it reaches level 6.
             window_clear('cls')
-        
-        keep_playing = ask_continue_playing(num_image, keep_playing, \
-                                            level_complete, lap_counter)
+
+        if level_complete:
+            print(GAME_OVER)
+            print(DOLL_PICTURE[lap_counter])
+        else:
+            print(GAME_OVER)
+            print(DOLL_PICTURE[num_image + 1])
+
+        dashboard(word, formatted_word, string_entered, formatted_string_ent,\
+                  found_letters)
+
+        keep_playing = ask_continue_playing(keep_playing)
                                             
     if level_complete:
         print(GAME_OVER)

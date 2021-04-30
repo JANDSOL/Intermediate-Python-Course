@@ -1,2 +1,3 @@
 .vscode/
 venv/**
+hangman_game/__pycache__

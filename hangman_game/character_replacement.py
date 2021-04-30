@@ -3,24 +3,26 @@ class CharacterReplacement:
 
     def __init__(self, word, formatted_word, string_entered, \
                  formatted_string_ent, found_letters):
-        
         # Check if it's letter.
         if len(string_entered) == 1 or len(string_entered) == 0:
             if formatted_string_ent in formatted_word:
                 index = 0
+
                 for idx_word, letter in enumerate(formatted_word):
-                    # Create dictionary with found letters.
+                    # formatted_string_ent == letter: Create 
+                    # dictionary with found letters.
                     if formatted_string_ent == letter:
                         found_letters[index] = word[idx_word]
                     index += 1
+
                 self.sorted_dashboard(found_letters, formatted_word, word)
             else:
                 self.sorted_dashboard(found_letters, formatted_word, word)
-        
         # Check if it's word.
         else:
             if formatted_string_ent == formatted_word:
                 print('\n    ', end='')
+
                 for letter in word:
                     print('  {}  '.format(letter), end='')
                 print('\n    ' + ' --- ' * len(word))
@@ -34,11 +36,13 @@ class CharacterReplacement:
             # It will help us to know if the letter was found within the word.
             # and as a consequence, give a space only where it was not found.
             entered_bucle2 = False
+
             for key_value in found_letters.items():
                 if key_value[1] == letter:
                     squeletor += ' {}  '.format(word[key_value[0]])
                     entered_bucle2 = True
                     break
+
             if entered_bucle2:
                 continue
             else:

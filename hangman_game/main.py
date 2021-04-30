@@ -24,7 +24,7 @@ def list_words():
     """Contains the list with words to guess."""
     with open('./archive/data.txt', 'r', encoding='UTF-8') as f:
         ls_words = [word.replace('\n', '').replace(' ', '') for word in f]
-
+        
         return ls_words
 
 def remove_accents(w_from_list, w_entered):
@@ -41,6 +41,7 @@ def list_random():
     """It will bring up random words without
     repetitions from the word list."""
     words_already_chosen = []
+
     # if len(words_already_chosen) - 1: Restart words
     # without repetitions if all words were covered.
     if len(words_already_chosen) - 1 == NUM_OF_WORDS_IN_LIST:
@@ -51,24 +52,31 @@ def list_random():
     # that are repeated in the game.
     while(True):
         idx_list_random = randrange(0, NUM_OF_WORDS_IN_LIST + 1)
+
         if idx_list_random not in words_already_chosen:
             words_already_chosen.append(idx_list_random)
             break
 
     return WORDS[idx_list_random]
 
-def ask_continue_playing(keep_playing):
+def ask_continue_playing(keep_playing, level_complete, word):
     """Ask the user if they want to continue playing."""
     k_playing = ''
+
+    if not level_complete:
+        print('\nLa palabra era:', word)
+
     while (True):
         k_playing = input('\n¿QUIERES SEGUIR JUGANDO?\n')
         k_playing = k_playing.replace(' ', '')
         k_playing = k_playing.lower()
         k_playing = k_playing.replace('í', 'i')
         k_playing = k_playing.replace('ó', 'o')
+
         if k_playing.isalpha() and k_playing == 'si':
             window_clear('cls')
             break
+
         elif k_playing.isalpha() and k_playing == 'no':
             keep_playing = False
             window_clear('cls')
@@ -85,6 +93,7 @@ def check_complete_letters(found_letters, word):
     """Check if the letters were found in their entirety."""
     level_complete = False
     repetition_counter = 0
+
     if len(found_letters) == len(word):
         for letter_entered in found_letters.values():
             if letter_entered in word:
@@ -103,41 +112,44 @@ def main():
     string_entered = ''
 
     while (keep_playing == True):  # Loop to keep playing.
+        word = list_random()
         level_complete = False
         # lap_counter will contain the index regarding the state
         # in which the doll was left if the user wins.
         lap_counter = 0
-        word = list_random()
         found_letters = {}
         formatted_word, string_entered, formatted_string_ent = '', '', ''
 
         for num_image, picture_level in enumerate(LEVEL):  # Level tour.
-
             while(level_complete == False):  # Loop to stop at each level.
-
                 if num_image < 6:
                     # Validate if invalid characters are entered
                     print(picture_level)
                     print(DOLL_PICTURE[num_image])
+
                     dashboard(word, formatted_word, string_entered,formatted_string_ent, \
                               found_letters)
-                    print(word, found_letters)
+
                     string_entered = input('Ingresa una letra o palabra: ')
                     string_entered = string_entered.replace(' ', '')
+
                     if string_entered.isalpha():  # Validate in case of entering an error character.
                         formatted_word, formatted_string_ent = \
                         remove_accents(word, string_entered)
+
                         # if len(string_entered) == 1: Check if it's letter.
                         if len(string_entered) == 1:
                             if formatted_string_ent in formatted_word:
                                 dashboard(word, formatted_word, string_entered, \
                                           formatted_string_ent, found_letters)
+
                                 level_complete = check_complete_letters(found_letters, word)
                             else:
                                 lap_counter += 1
                                 window_clear('cls')
                                 break
                         else:  # Check if it's word.
+
                             if formatted_string_ent == formatted_word:
                                 level_complete = True
                                 break
@@ -164,7 +176,7 @@ def main():
         dashboard(word, formatted_word, string_entered, formatted_string_ent,\
                   found_letters)
 
-        keep_playing = ask_continue_playing(keep_playing)
+        keep_playing = ask_continue_playing(keep_playing, level_complete, word)
                                             
     if level_complete:
         print(GAME_OVER)

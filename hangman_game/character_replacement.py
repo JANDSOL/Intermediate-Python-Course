@@ -8,10 +8,10 @@ class CharacterReplacement:
         if len(string_entered) == 1 or len(string_entered) == 0:
             if formatted_string_ent in formatted_word:
                 index = 0
-                for letter in formatted_word:
+                for idx_word, letter in enumerate(formatted_word):
                     # Create dictionary with found letters.
                     if formatted_string_ent == letter:
-                        found_letters[index] = letter
+                        found_letters[index] = word[idx_word]
                     index += 1
                 self.sorted_dashboard(found_letters, formatted_word, word)
             else:
@@ -30,7 +30,7 @@ class CharacterReplacement:
 
     def sorted_dashboard(self, found_letters, formatted_word, word):
         squeletor = '\n    '
-        for letter in formatted_word:
+        for letter in word:
             # It will help us to know if the letter was found within the word.
             # and as a consequence, give a space only where it was not found.
             entered_bucle2 = False

@@ -1,7 +1,7 @@
-# Curso de Python Intermedio
+# Curso de Python Intermedio - Platzi
 [![N|Solid](https://static.platzi.com/media/achievements/badge-intermedio-de-python-d0d16518-5edd-450a-b2a9-0710bded1494.png)](https://bit.ly/3uajWmO)
 
-Dentro de este repositorio vas a encontrar todos los archivos generados en el curso de Python Intermedio de Platzi, desde ejemplos, hasta los propios retos planteados en cada clase.
+Dentro de este repositorio vas a encontrar todos los archivos creados en el curso de "Python Intermedio" de Platzi, desde los ejemplos, hasta los propios retos planteados en cada clase.
 ## Módulos de la clase:
 
 - 💪🏼 Preparación de tu entorno antes de empezar.
@@ -23,4 +23,4 @@ Dentro de este repositorio vas a encontrar todos los archivos generados en el cu
 - Entre otros...
 
 Todo esto y más encontraras en este repositorio de GitHub.
-**Recuerda siempre, ¡Nunca parar de aprender! 😃**
+**Recuerda siempre, ¡Nunca pares de aprender! 😃**
